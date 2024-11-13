@@ -3,21 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retroalimentación</title>
+    <title>Retroalimentación - MathMaster</title>
+    <style>
+        /* Estilos generales */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Header y navegación */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: #4b5563;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #e0f2fe;
+        }
+
+        /* Contenido principal */
+        h1, h2, h3 {
+            color: #1e3a8a;
+        }
+
+        /* Tarjeta de resultados */
+        .results-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        /* Gráfico de desempeño */
+        .performance-chart {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e7ff;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .performance-bar {
+            height: 100%;
+            background-color: #3b82f6;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Soluciones detalladas */
+        .solution-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .solution-step {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid #3b82f6;
+        }
+
+        /* Sugerencias personalizadas */
+        .suggestions-card {
+            background-color: #e0f2fe;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+        }
+
+        .suggestion-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .suggestion-link {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .suggestion-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .score {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Retroalimentación</h1>
-        <nav>
-            <a href="dashboard.html">Volver al Dashboard</a>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">MathMaster</a>
+                <a href="dashboard.html" class="nav-link">Volver al Dashboard</a>
+            </nav>
+        </div>
     </header>
 
-    <section>
-        <h2>Resultados</h2>
-        <p>Tu puntaje: 8/10</p>
-        <h3>Solución detallada</h3>
-        <p>Aquí va la explicación paso a paso de la solución del ejercicio.</p>
-    </section>
+    <main class="container">
+        <h1>Retroalimentación</h1>
+        
+        <section class="results-card">
+            <h2>Resultados del ejercicio</h2>
+            <div class="score">Tu puntaje: <span id="userScore">8</span>/10</div>
+            <h3>Desempeño general</h3>
+            <div class="performance-chart">
+                <div class="performance-bar" id="performanceBar"></div>
+            </div>
+            <p>Has completado el <span id="completionPercentage">80</span>% de los ejercicios correctamente.</p>
+        </section>
+
+        <section>
+            <h2>Soluciones detalladas</h2>
+            <div id="solutionsContainer">
+                <!-- Las soluciones se cargarán dinámicamente aquí -->
+            </div>
+        </section>
+
+        <section class="suggestions-card">
+            <h2>Sugerencias personalizadas</h2>
+            <ul id="suggestionsList">
+                <!-- Las sugerencias se cargarán dinámicamente aquí -->
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        // Simulación de datos de ejercicios
+        const exerciseData = [
+            {
+                question: "Resuelve la ecuación: 2x + 5 = 13",
+                solution: [
+                    "Restamos 5 a ambos lados de la ecuación: 2x + 5 - 5 = 13 - 5",
+                    "Simplificamos: 2x = 8",
+                    "Dividimos ambos lados por 2: 2x ÷ 2 = 8 ÷ 2",
+                    "Obtenemos el resultado: x = 4"
+                ],
+                correct: true
+            },
+            {
+                question: "Calcula el área de un triángulo con base 6 cm y altura 4 cm",
+                solution: [
+                    "Utilizamos la fórmula del área de un triángulo: A = (base * altura) / 2",
+                    "Sustituimos los valores: A = (6 cm * 4 cm) / 2",
+                    "Realizamos el cálculo: A = 24 cm² / 2",
+                    "Obtenemos el resultado: A = 12 cm²"
+                ],
+                correct: false
+            }
+        ];
+
+        // Función para cargar las soluciones
+        function loadSolutions() {
+            const container = document.getElementById('solutionsContainer');
+            exerciseData.forEach((exercise, index) => {
+                const card = document.createElement('div');
+                card.className = 'solution-card';
+                card.innerHTML = `
+                    <h3>Ejercicio ${index + 1}: ${exercise.question}</h3>
+                    <p>Estado: ${exercise.correct ? 'Correcto' : 'Incorrecto'}</p>
+                    <h4>Solución paso a paso:</h4>
+                    ${exercise.solution.map(step => `<div class="solution-step">${step}</div>`).join('')}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Función para cargar sugerencias personalizadas
+        function loadSuggestions() {
+            const suggestionsList = document.getElementById('suggestionsList');
+            const suggestions = [
+                "Practica más ejercicios de álgebra básica",
+                "Revisa el concepto de área de figuras geométricas",
+                "Intenta resolver problemas de aplicación real"
+            ];
+            suggestions.forEach(suggestion => {
+                const li = document.createElement('li');
+                li.className = 'suggestion-item';
+                li.innerHTML = `<a href="#" class="suggestion-link">${suggestion}</a>`;
+                suggestionsList.appendChild(li);
+            });
+        }
+
+        // Función para actualizar la barra de desempeño
+        function updatePerformanceBar() {
+            const performanceBar = document.getElementById('performanceBar');
+            const completionPercentage = document.getElementById('completionPercentage');
+            const percentage = 80; // Este valor debería venir de los datos reales del usuario
+            performanceBar.style.width = `${percentage}%`;
+            completionPercentage.textContent = percentage;
+        }
+
+        // Cargar contenido cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSolutions();
+            loadSuggestions();
+            updatePerformanceBar();
+        });
+    </script>
 </body>
 </html>
