@@ -3,30 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explicaciones</title>
+    <title>Explicaciones - MathMaster</title>
+    <style>
+        /* Estilos generales */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Header y navegación */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: #4b5563;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #e0f2fe;
+        }
+
+        /* Contenido principal */
+        h1, h2 {
+            color: #1e3a8a;
+        }
+
+        /* Filtros de temas */
+        .topic-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-filter {
+            padding: 0.5rem 1rem;
+            background-color: #e0f2fe;
+            border: 1px solid #3b82f6;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .topic-filter:hover, .topic-filter.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        /* Explicaciones */
+        .explanation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .explanation-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .explanation-content {
+            padding: 1rem;
+        }
+
+        .explanation-title {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .explanation-text {
+            margin-bottom: 1rem;
+        }
+
+        .explanation-video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+
+        /* Botones de interacción */
+        .interaction-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            background-color: #f3f4f6;
+        }
+
+        .interaction-btn {
+            padding: 0.25rem 0.5rem;
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .interaction-btn:hover {
+            background-color: #e0f2fe;
+        }
+
+        .interaction-btn.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .topic-filters {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Explicaciones de conceptos matemáticos</h1>
-        <nav>
-            <a href="dashboard.html">Volver al Dashboard</a>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">MathMaster</a>
+                <a href="dashboard.html" class="nav-link">Volver al Dashboard</a>
+            </nav>
+        </div>
     </header>
 
-    <section>
-        <h2>Elige un tema</h2>
-        <ul>
-            <li><a href="explicacion-algebra.html">Álgebra</a></li>
-            <li><a href="explicacion-geometria.html">Geometría</a></li>
-            <li><a href="explicacion-trigonometria.html">Trigonometría</a></li>
-        </ul>
-    </section>
+    <main class="container">
+        <h1>Explicaciones de conceptos matemáticos</h1>
+        
+        <section>
+            <h2>Filtrar por tema</h2>
+            <div class="topic-filters" id="topicFilters">
+                <button class="topic-filter active" data-topic="all">Todos</button>
+                <button class="topic-filter" data-topic="algebra">Álgebra</button>
+                <button class="topic-filter" data-topic="geometria">Geometría</button>
+                <button class="topic-filter" data-topic="trigonometria">Trigonometría</button>
+                <button class="topic-filter" data-topic="calculo">Cálculo</button>
+            </div>
+        </section>
 
-    <section>
-        <h2>Videos recomendados</h2>
-        <ul>
-            <li><a href="video-algebra.html">Introducción a Álgebra</a></li>
-        </ul>
-    </section>
+        <section>
+            <h2>Explicaciones disponibles</h2>
+            <div class="explanation-grid" id="explanationGrid">
+                <!-- Las explicaciones se cargarán dinámicamente aquí -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const explanations = [
+            {
+                id: 1,
+                title: "Introducción al Álgebra",
+                text: "El álgebra es una rama de las matemáticas que estudia la combinación de elementos de estructuras abstractas acorde a ciertas reglas.",
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                topic: "algebra"
+            },
+            {
+                id: 2,
+                title: "Teorema de Pitágoras",
+                text: "El teorema de Pitágoras establece que en un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los otros dos lados.",
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                topic: "geometria"
+            },
+            {
+                id: 3,
+                title: "Funciones trigonométricas",
+                text: "Las funciones trigonométricas son funciones de ángulos que relacionan los ángulos de un triángulo con las longitudes de sus lados.",
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                topic: "trigonometria"
+            },
+            {
+                id: 4,
+                title: "Introducción al Cálculo",
+                text: "El cálculo es una rama de las matemáticas que se ocupa del estudio de las tasas de cambio y la acumulación.",
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                topic: "calculo"
+            }
+        ];
+
+        const explanationGrid = document.getElementById('explanationGrid');
+        const topicFilters = document.getElementById('topicFilters');
+
+        function createExplanationCard(explanation) {
+            const card = document.createElement('div');
+            card.className = 'explanation-card';
+            card.innerHTML = `
+                <div class="explanation-content">
+                    <h3 class="explanation-title">${explanation.title}</h3>
+                    <p class="explanation-text">${explanation.text}</p>
+                    <iframe class="explanation-video" src="${explanation.video}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="interaction-buttons">
+                    <button class="interaction-btn like-btn" data-id="${explanation.id}">Me gusta</button>
+                    <button class="interaction-btn complete-btn" data-id="${explanation.id}">Marcar como completado</button>
+                    <button class="interaction-btn add-btn" data-id="${explanation.id}">Añadir a mi plan</button>
+                </div>
+            `;
+            return card;
+        }
+
+        function loadExplanations(topic = 'all') {
+            explanationGrid.innerHTML = '';
+            explanations.forEach(explanation => {
+                if (topic === 'all' || explanation.topic === topic) {
+                    const card = createExplanationCard(explanation);
+                    explanationGrid.appendChild(card);
+                }
+            });
+        }
+
+        topicFilters.addEventListener('click', (e) => {
+            if (e.target.classList.contains('topic-filter')) {
+                const topic = e.target.dataset.topic;
+                document.querySelectorAll('.topic-filter').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                loadExplanations(topic);
+            }
+        });
+
+        explanationGrid.addEventListener('click', (e) => {
+            if (e.target.classList.contains('interaction-btn')) {
+                e.target.classList.toggle('active');
+                const action = e.target.textContent.toLowerCase();
+                const id = e.target.dataset.id;
+                console.log(`${action} clicked for explanation ${id}`);
+                // Aquí se implementaría la lógica para manejar la interacción (por ejemplo, enviar a un servidor)
+            }
+        });
+
+        // Cargar todas las explicaciones inicialmente
+        loadExplanations();
+    </script>
 </body>
 </html>
