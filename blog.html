@@ -3,32 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Blog - MathMaster</title>
+    <style>
+        /* Estilos generales */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Header y navegación */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: #4b5563;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #e0f2fe;
+        }
+
+        /* Contenido principal */
+        main {
+            margin-top: 2rem;
+        }
+
+        h1, h2 {
+            color: #1e3a8a;
+            margin-top: 0;
+        }
+
+        /* Secciones del blog */
+        .blog-section {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Lista de artículos y categorías */
+        .article-list, .category-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .article-list li, .category-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-list a, .category-list a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .article-list a:hover, .category-list a:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-links {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Blog de la Plataforma</h1>
-        <nav>
-            <a href="home.html">Volver a Inicio</a>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">MathMaster</a>
+                <div class="nav-links">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="ejercicios.html">Ejercicios</a>
+                    <a href="explicaciones.html">Explicaciones</a>
+                    <a href="recompensas.html">Recompensas</a>
+                    <a href="cronograma.html">Cronograma</a>
+                    <a href="perfil.html">Perfil</a>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <section>
-        <h2>Artículos Recientes</h2>
-        <ul>
-            <li><a href="articulo1.html">5 Consejos para Mejorar tu Rendimiento en Matemáticas</a></li>
-            <li><a href="articulo2.html">Cómo Utilizar el Cronograma de Estudio de Forma Efectiva</a></li>
-            <li><a href="articulo3.html">La Importancia del Active Recall y Spaced Repetition</a></li>
-        </ul>
-    </section>
+    <main class="container">
+        <h1>Blog de la Plataforma</h1>
+        
+        <section class="blog-section">
+            <h2>Artículos Recientes</h2>
+            <ul class="article-list">
+                <li><a href="articulo1.html">5 Consejos para Mejorar tu Rendimiento en Matemáticas</a></li>
+                <li><a href="articulo2.html">Cómo Utilizar el Cronograma de Estudio de Forma Efectiva</a></li>
+                <li><a href="articulo3.html">La Importancia del Active Recall y Spaced Repetition</a></li>
+            </ul>
+        </section>
 
-    <section>
-        <h2>Categorías</h2>
-        <ul>
-            <li><a href="categoria-noticias.html">Noticias</a></li>
-            <li><a href="categoria-consejos.html">Consejos</a></li>
-            <li><a href="categoria-recursos.html">Recursos</a></li>
-        </ul>
-    </section>
+        <section class="blog-section">
+            <h2>Categorías</h2>
+            <ul class="category-list">
+                <li><a href="categoria-noticias.html">Noticias</a></li>
+                <li><a href="categoria-consejos.html">Consejos</a></li>
+                <li><a href="categoria-recursos.html">Recursos</a></li>
+            </ul>
+        </section>
+    </main>
 </body>
 </html>
