@@ -61,52 +61,122 @@
 
         /* Niveles de ejercicios */
         .exercise-levels {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2rem;
         }
 
-        .level-card {
+        .level-btn {
+            padding: 0.5rem 1rem;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .level-btn:hover, .level-btn.active {
+            background-color: #2563eb;
+        }
+
+        /* Ejercicio interactivo */
+        .exercise-container {
             background-color: #ffffff;
             border-radius: 0.5rem;
             padding: 1.5rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
         }
 
-        .level-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
-        }
-
-        .level-card h3 {
-            margin-top: 0;
-            color: #1e3a8a;
-        }
-
-        .level-card p {
+        .exercise-question {
+            font-size: 1.2rem;
             margin-bottom: 1rem;
         }
 
-        .btn {
-            display: inline-block;
-            background-color: #3b82f6;
-            color: white;
-            padding: 0.5rem 1rem;
+        .exercise-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .option-btn {
+            padding: 0.5rem;
+            background-color: #e0f2fe;
+            border: 1px solid #3b82f6;
             border-radius: 0.25rem;
-            text-decoration: none;
+            cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .btn:hover {
-            background-color: #2563eb;
+        .option-btn:hover {
+            background-color: #bfdbfe;
+        }
+
+        .option-btn.correct {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .option-btn.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        /* Progreso */
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e7ff;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: #3b82f6;
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Retroalimentación y botón Reforzar */
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            display: none;
+        }
+
+        .feedback.correct {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .feedback.incorrect {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .reinforce-btn {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #f59e0b;
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .reinforce-btn:hover {
+            background-color: #d97706;
         }
 
         /* Responsive design */
         @media (max-width: 768px) {
-            .exercise-levels {
+            .exercise-options {
                 grid-template-columns: 1fr;
             }
         }
@@ -128,52 +198,136 @@
         <section>
             <h2>Selecciona un nivel</h2>
             <div class="exercise-levels">
-                <div class="level-card">
-                    <h3>Fácil</h3>
-                    <p>Perfecto para principiantes o para repasar conceptos básicos.</p>
-                    <a href="ejercicios-nivel1.html" class="btn">Comenzar</a>
-                </div>
-                <div class="level-card">
-                    <h3>Intermedio</h3>
-                    <p>Desafíos para quienes ya tienen una base sólida en matemáticas.</p>
-                    <a href="ejercicios-nivel2.html" class="btn">Comenzar</a>
-                </div>
-                <div class="level-card">
-                    <h3>Avanzado</h3>
-                    <p>Problemas complejos para expertos en matemáticas.</p>
-                    <a href="ejercicios-nivel3.html" class="btn">Comenzar</a>
-                </div>
+                <button class="level-btn" data-level="facil">Fácil</button>
+                <button class="level-btn" data-level="intermedio">Intermedio</button>
+                <button class="level-btn" data-level="avanzado">Avanzado</button>
             </div>
         </section>
 
         <section>
-            <h2>Temas populares</h2>
-            <ul id="popular-topics">
-                <!-- Los temas se cargarán dinámicamente aquí -->
-            </ul>
+            <div class="progress-bar">
+                <div class="progress" id="levelProgress"></div>
+            </div>
+            <p>Progreso del nivel: <span id="progressText">0%</span></p>
+        </section>
+
+        <section class="exercise-container">
+            <div class="exercise-question" id="question"></div>
+            <div class="exercise-options" id="options"></div>
+            <div class="feedback" id="feedback"></div>
+            <button class="reinforce-btn" id="reinforceBtn">Reforzar este tema</button>
         </section>
     </main>
 
     <script>
-        // Simulación de carga de temas populares
-        const popularTopics = [
-            'Álgebra básica',
-            'Geometría plana',
-            'Trigonometría',
-            'Cálculo diferencial',
-            'Estadística descriptiva'
-        ];
+        const levels = {
+            facil: [
+                { question: "¿Cuánto es 2 + 2?", options: ["3", "4", "5", "6"], correct: 1 },
+                { question: "¿Cuál es el doble de 5?", options: ["8", "10", "12", "15"], correct: 1 },
+                { question: "¿Cuánto es 10 - 7?", options: ["1", "2", "3", "4"], correct: 2 }
+            ],
+            intermedio: [
+                { question: "¿Cuál es la raíz cuadrada de 64?", options: ["6", "7", "8", "9"], correct: 2 },
+                { question: "¿Cuánto es 3 x 12?", options: ["33", "34", "35", "36"], correct: 3 },
+                { question: "¿Cuál es el 20% de 80?", options: ["12", "14", "16", "18"], correct: 2 }
+            ],
+            avanzado: [
+                { question: "¿Cuál es el resultado de 2^5?", options: ["25", "30", "32", "64"], correct: 2 },
+                { question: "¿Cuál es el seno de 30 grados?", options: ["0.25", "0.5", "0.75", "1"], correct: 1 },
+                { question: "¿Cuál es la derivada de x^2?", options: ["x", "2x", "x^2", "2"], correct: 1 }
+            ]
+        };
 
-        const topicsList = document.getElementById('popular-topics');
+        let currentLevel = 'facil';
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
 
-        popularTopics.forEach(topic => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = `#${topic.toLowerCase().replace(/ /g, '-')}`;
-            a.textContent = topic;
-            li.appendChild(a);
-            topicsList.appendChild(li);
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const feedbackEl = document.getElementById('feedback');
+        const reinforceBtnEl = document.getElementById('reinforceBtn');
+        const progressEl = document.getElementById('levelProgress');
+        const progressTextEl = document.getElementById('progressText');
+
+        function loadQuestion() {
+            const question = levels[currentLevel][currentQuestionIndex];
+            questionEl.textContent = question.question;
+            optionsEl.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-btn');
+                button.addEventListener('click', () => checkAnswer(index));
+                optionsEl.appendChild(button);
+            });
+            feedbackEl.style.display = 'none';
+            reinforceBtnEl.style.display = 'none';
+        }
+
+        function checkAnswer(selectedIndex) {
+            const question = levels[currentLevel][currentQuestionIndex];
+            const buttons = optionsEl.getElementsByClassName('option-btn');
+            
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].disabled = true;
+                if (i === question.correct - 1) {
+                    buttons[i].classList.add('correct');
+                } else if (i === selectedIndex) {
+                    buttons[i].classList.add('incorrect');
+                }
+            }
+
+            if (selectedIndex === question.correct - 1) {
+                feedbackEl.textContent = "¡Correcto! Bien hecho.";
+                feedbackEl.className = "feedback correct";
+                correctAnswers++;
+            } else {
+                feedbackEl.textContent = "Incorrecto. La respuesta correcta era: " + question.options[question.correct - 1];
+                feedbackEl.className = "feedback incorrect";
+                reinforceBtnEl.style.display = 'block';
+            }
+            feedbackEl.style.display = 'block';
+
+            currentQuestionIndex++;
+            updateProgress();
+
+            if (currentQuestionIndex < levels[currentLevel].length) {
+                setTimeout(loadQuestion, 2000);
+            } else {
+                setTimeout(() => {
+                    alert(`Has completado el nivel ${currentLevel}. Acertaste ${correctAnswers} de ${levels[currentLevel].length} preguntas.`);
+                    resetLevel();
+                }, 2000);
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestionIndex / levels[currentLevel].length) * 100;
+            progressEl.style.width = `${progress}%`;
+            progressTextEl.textContent = `${Math.round(progress)}%`;
+        }
+
+        function resetLevel() {
+            currentQuestionIndex = 0;
+            correctAnswers = 0;
+            updateProgress();
+            loadQuestion();
+        }
+
+        document.querySelectorAll('.level-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                currentLevel = e.target.dataset.level;
+                document.querySelectorAll('.level-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                resetLevel();
+            });
         });
+
+        reinforceBtnEl.addEventListener('click', () => {
+            alert("Aquí se mostrarían recursos adicionales y ejercicios de refuerzo para este tema.");
+        });
+
+        loadQuestion();
     </script>
 </body>
 </html>
