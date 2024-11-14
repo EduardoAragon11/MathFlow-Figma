@@ -3,15 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recompensas</title>
+    <title>Recompensas y Logros - MathMaster</title>
+    <style>
+        /* Estilos generales */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Header y navegación */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: #4b5563;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #e0f2fe;
+        }
+
+        /* Contenido principal */
+        h1, h2, h3 {
+            color: #1e3a8a;
+        }
+
+        /* Tarjetas de sección */
+        .section-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Sistema de puntos */
+        .points-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3b82f6;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Lista de logros */
+        .achievements-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #e0f2fe;
+            border-radius: 0.5rem;
+        }
+
+        .achievement-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .achievement-details {
+            flex-grow: 1;
+        }
+
+        .achievement-title {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .achievement-description {
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        /* Catálogo de recompensas */
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .reward-item {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .reward-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .reward-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .reward-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .reward-cost {
+            color: #3b82f6;
+            font-weight: bold;
+        }
+
+        .claim-btn {
+            display: inline-block;
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            margin-top: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .claim-btn:hover {
+            background-color: #2563eb;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .rewards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Recompensas y Logros</h1>
-        <nav>
-            <a href="dashboard.html">Volver al Dashboard</a>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">MathMaster</a>
+                <a href="dashboard.html" class="nav-link">Volver al Dashboard</a>
+            </nav>
+        </div>
     </header>
 
-    <section>
-        <h2>Logros
+    <main class="container">
+        <h1>Recompensas y Logros</h1>
+        
+        <section class="section-card">
+            <h2>Tus Puntos</h2>
+            <div class="points-display">
+                <span id="userPoints">1250</span> puntos
+            </div>
+        </section>
+
+        <section class="section-card">
+            <h2>Logros Desbloqueados</h2>
+            <ul class="achievements-list" id="achievementsList">
+                <!-- Los logros se cargarán dinámicamente aquí -->
+            </ul>
+        </section>
+
+        <section class="section-card">
+            <h2>Catálogo de Recompensas</h2>
+            <div class="rewards-grid" id="rewardsGrid">
+                <!-- Las recompensas se cargarán dinámicamente aquí -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Datos de ejemplo para logros
+        const achievements = [
+            { icon: "🏆", title: "Maestro del Álgebra", description: "Completaste todos los ejercicios de álgebra" },
+            { icon: "🔥", title: "Racha de 7 días", description: "Practicaste durante 7 días consecutivos" },
+            { icon: "🚀", title: "Velocista Matemático", description: "Resolviste 10 problemas en menos de 5 minutos" }
+        ];
+
+        // Datos de ejemplo para recompensas
+        const rewards = [
+            { icon: "📚", title: "Libro de Matemáticas Avanzadas", cost: 500 },
+            { icon: "🎨", title: "Tema Personalizado", cost: 300 },
+            { icon: "🏅", title: "Insignia Exclusiva", cost: 1000 },
+            { icon: "🎓", title: "Curso Premium", cost: 2000 }
+        ];
+
+        // Función para cargar los logros
+        function loadAchievements() {
+            const achievementsList = document.getElementById('achievementsList');
+            achievements.forEach(achievement => {
+                const li = document.createElement('li');
+                li.className = 'achievement-item';
+                li.innerHTML = `
+                    <div class="achievement-icon">${achievement.icon}</div>
+                    <div class="achievement-details">
+                        <div class="achievement-title">${achievement.title}</div>
+                        <div class="achievement-description">${achievement.description}</div>
+                    </div>
+                `;
+                achievementsList.appendChild(li);
+            });
+        }
+
+        // Función para cargar las recompensas
+        function loadRewards() {
+            const rewardsGrid = document.getElementById('rewardsGrid');
+            rewards.forEach(reward => {
+                const div = document.createElement('div');
+                div.className = 'reward-item';
+                div.innerHTML = `
+                    <div class="reward-icon">${reward.icon}</div>
+                    <div class="reward-title">${reward.title}</div>
+                    <div class="reward-cost">${reward.cost} puntos</div>
+                    <a href="#" class="claim-btn">Reclamar</a>
+                `;
+                rewardsGrid.appendChild(div);
+            });
+        }
+
+        // Cargar contenido cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAchievements();
+            loadRewards();
+        });
+    </script>
+</body>
+</html>
