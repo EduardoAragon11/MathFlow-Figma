@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium - MathMaster</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: #4b5563;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #e0f2fe;
+        }
+
+        .nav-links a.premium {
+            background-color: #ffd700;
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+        .nav-links a.premium:hover {
+            background-color: #ffed4a;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            flex: 1;
+            max-width: 350px;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card h2 {
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #6b7280;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3b82f6;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2563eb;
+        }
+
+        .benefits {
+            margin-top: 3rem;
+        }
+
+        .benefits h2 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+
+        .benefits ul {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .benefits li {
+            background-color: #e0f2fe;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            text-align: center;
+        }
+
+        .annual-plan {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .annual-plan h2,
+        .annual-plan .price,
+        .annual-plan .price span {
+            color: #ffffff;
+        }
+
+        .annual-plan .btn {
+            background-color: #ffffff;
+            color: #764ba2;
+        }
+
+        .annual-plan .btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .savings-badge {
+            position: absolute;
+            top: 30px;
+            right: -40px;
+            background-color: #ffd700;
+            color: #1e3a8a;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">MathMaster</a>
+                <div class="nav-links">
+                    <a href="dashboard.html">Volver al Dashboard</a>
+                    <a href="perfil.html">Perfil</a>
+                    <a href="premium.html" class="premium">Premium</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Planes Premium</h1>
+        <div class="pricing-container">
+            <div class="pricing-card">
+                <h2>Plan Mensual</h2>
+                <div class="price">S/. 10 <span>/mes</span></div>
+                <p>Acceso completo a todas las funciones premium</p>
+                <a href="#" class="btn">Suscribirse</a>
+            </div>
+            <div class="pricing-card annual-plan">
+                <div class="savings-badge">¡2 meses gratis!</div>
+                <h2>Plan Anual</h2>
+                <div class="price">S/. 120 <span>/14 meses</span></div>
+                <p>¡Ahorra $20 y obtén 2 meses adicionales!</p>
+                <a href="#" class="btn">Suscribirse y Ahorrar</a>
+            </div>
+        </div>
+
+        <section class="benefits">
+            <h2>Beneficios Premium</h2>
+            <ul>
+                <li>Acceso ilimitado a todos los ejercicios y explicaciones</li>
+                <li>Tutorías personalizadas con expertos en matemáticas</li>
+                <li>Ejercicios exclusivos de nivel avanzado</li>
+                <li>Seguimiento detallado de tu progreso</li>
+                <li>Descarga de material de estudio en PDF</li>
+                <li>Acceso prioritario a nuevas funciones</li>
+                <li>Soporte premium 24/7</li>
+                <li>Certificados de finalización de cursos</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

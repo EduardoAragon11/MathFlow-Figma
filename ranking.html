@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking - MathMaster</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: #4b5563;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #e0f2fe;
+        }
+
+        .nav-links a.ranking {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-links a.ranking:hover {
+            background-color: #45a049;
+        }
+
+        h1, h2 {
+            color: #1e3a8a;
+            text-align: center;
+        }
+
+        .ranking-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ranking-section {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            flex: 1 1 300px;
+        }
+
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .ranking-table th,
+        .ranking-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .ranking-table th {
+            background-color: #f3f4f6;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .ranking-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .ranking-table tr:hover {
+            background-color: #e0f2fe;
+        }
+
+        .medal {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .ranking-section {
+                flex: 1 1 100%;
+            }
+        }
+        
+        .nav-links a.premium {
+            background-color: #ffd700;
+            color: #1e3a8a;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a.premium:hover {
+            background-color: #ffed4a;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">MathMaster</a>
+                <div class="nav-links">
+                    <a href="ejercicios.html">Ejercicios</a>
+                    <a href="explicaciones.html">Explicaciones</a>
+                    <a href="recompensas.html">Recompensas</a>
+                    <a href="cronograma.html">Cronograma</a>
+                    <a href="perfil.html">Perfil</a>
+                    <a href="premium.html" class="premium">Premium</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Ranking de Usuarios</h1>
+
+        <div class="ranking-container">
+            <div class="ranking-section">
+                <h2>Álgebra - Básico</h2>
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Posición</th>
+                            <th>Usuario</th>
+                            <th>Puntaje</th>
+                            <th>Nivel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="medal">🥇</span>1</td>
+                            <td>MathWizard</td>
+                            <td>980</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td><span class="medal">🥈</span>2</td>
+                            <td>AlgebraPro</td>
+                            <td>950</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td><span class="medal">🥉</span>3</td>
+                            <td>NumberNinja</td>
+                            <td>920</td>
+                            <td>13</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>EquationMaster</td>
+                            <td>890</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>MathExplorer</td>
+                            <td>860</td>
+                            <td>11</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ranking-section">
+                <h2>Geometría - Intermedio</h2>
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Posición</th>
+                            <th>Usuario</th>
+                            <th>Puntaje</th>
+                            <th>Problemas Resueltos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="medal">🥇</span>1</td>
+                            <td>ShapeShifter</td>
+                            <td>1200</td>
+                            <td>150</td>
+                        </tr>
+                        <tr>
+                            <td><span class="medal">🥈</span>2</td>
+                            <td>AngleMaster</td>
+                            <td>1150</td>
+                            <td>140</td>
+                        </tr>
+                        <tr>
+                            <td><span class="medal">🥉</span>3</td>
+                            <td>TriangleExpert</td>
+                            <td>1100</td>
+                            <td>135</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>CircleChamp</td>
+                            <td>1050</td>
+                            <td>130</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>PolygonPro</td>
+                            <td>1000</td>
+                            <td>125</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ranking-section">
+                <h2>Combinatoria - Avanzado</h2>
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Posición</th>
+                            <th>Usuario</th>
+                            <th>Puntaje</th>
+                            <th>Tiempo Promedio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="medal">🥇</span>1</td>
+                            <td>ComboKing</td>
+                            <td>1500</td>
+                            <td>2m 30s</td>
+                        </tr>
+                        <tr>
+                            <td><span class="medal">🥈</span>2</td>
+                            <td>PermutationQueen</td>
+                            <td>1450</td>
+                            <td>2m 45s</td>
+                        </tr>
+                        <tr>
+                            <td><span class="medal">🥉</span>3</td>
+                            <td>ProbabilityAce</td>
+                            <td>1400</td>
+                            <td>3m 00s</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>StatisticsSage</td>
+                            <td>1350</td>
+                            <td>3m 15s</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>GraphTheoryGuru</td>
+                            <td>1300</td>
+                            <td>3m 30s</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
